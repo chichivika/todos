@@ -1,0 +1,27 @@
+@use 'src/styles/colors';
+
+.todos-cnt{
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: colors.$list-bg-color;
+    box-shadow: 1px 1px 5px colors.$header-color, -1px -1px 5px colors.$header-color;
+    .todos-list{
+        overflow-y: auto;
+        height: 100%;
+    }
+    .todos-input{
+        margin: 1rem 0px;
+        padding: 0px 2rem;
+        box-sizing: border-box;
+    }
+    div.MuiInputBase-root.MuiInput-root, div.MuiInputBase-root.MuiInput-root.Mui-focused{
+            &::after, &::before{
+                border-bottom-color: lightgrey;
+            }
+    }
+}

@@ -1,0 +1,16 @@
+
+@use 'src/styles/colors';
+
+:root{
+  height: 100%;
+}
+#root{
+  height: inherit;
+}
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  margin: 0;
+  width: 100%;
+  height: inherit;
+  background-color: colors.$bg-color;
+}
