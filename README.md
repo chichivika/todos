@@ -1,4 +1,4 @@
-## Simple TODO list.
+# Simple TODO list
 
 ## Available Scripts
 
