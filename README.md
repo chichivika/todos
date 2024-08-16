@@ -1,7 +1,7 @@
-# Simple TODO list.
+## Simple TODO list.
 
-## scripts:
+## Available Scripts
 
-### npm start
+### 'npm start'
 
-### npm test
+### 'npm test'
