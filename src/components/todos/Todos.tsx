@@ -39,7 +39,7 @@ const Todos = function (props: TodosProps) {
             <TodosFooter
                 itemsToDone={getFilteredItems('active').length}
                 showClearCompleted={getFilteredItems('completed').length > 0}
-                onClearCompleted={()=>props.onDeleteCompleted?.()}
+                onClearCompleted={() => props.onDeleteCompleted?.()}
                 viewMode={viewMode}
                 onModeChange={key => setViewMode(key)}
             />
@@ -53,6 +53,7 @@ const Todos = function (props: TodosProps) {
     function renderOneItem(itemData: TodosItemType) {
         return (
             <TodosItem {...itemData}
+                key={itemData.desc}
                 onStatusClick={() => onStatusClick(itemData)}
             />
         );
@@ -81,7 +82,7 @@ const Todos = function (props: TodosProps) {
         setInputValue('');
 
         let listCnt = listRef.current;
-        if(listCnt !== null){
+        if (listCnt !== null) {
             listCnt.scrollTop = 0;
         }
     }

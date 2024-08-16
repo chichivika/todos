@@ -14,7 +14,7 @@ const TodosItem = function (props: Props) {
     }
 
     return (
-        <div className={sClassName} key={props.desc}>
+        <div className={sClassName}>
             <Checkbox checked={!props.isActive}
                 disabled={!props.isActive}
                 onChange={event => props.onStatusClick?.()}
