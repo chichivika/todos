@@ -1,6 +1,6 @@
 import './TodosStyle.scss';
 import TodosInput from './todosInput/TodosInput';
-import TodosItem from './todosItem/TodosItem';
+import TodosList from './todosList/TodosList';
 import { TodosItemType, TodosItemsType } from 'utils/appUtils';
 import TodosFooter from './todosFooter/TodosFooter';
 import { useState } from 'react';
@@ -33,9 +33,10 @@ const Todos = function (props: TodosProps) {
                 onSubmit={onSubmitInput}
                 onChange={event => onChangeInput(event.target.value)}
             />
-            <div className='todos-list' ref={listRef}>
-                {renderItems()}
-            </div>
+            <TodosList listRef={listRef}
+                items={getFilteredItems(viewMode)}
+                onStatusClick={onStatusClick}
+            />
             <TodosFooter
                 itemsToDone={getFilteredItems('active').length}
                 showClearCompleted={getFilteredItems('completed').length > 0}
@@ -46,18 +47,6 @@ const Todos = function (props: TodosProps) {
         </div>
     );
 
-    function renderItems() {
-        let filteredItems = getFilteredItems(viewMode);
-        return filteredItems.map(itemData => renderOneItem(itemData));
-    }
-    function renderOneItem(itemData: TodosItemType) {
-        return (
-            <TodosItem {...itemData}
-                key={itemData.desc}
-                onStatusClick={() => onStatusClick(itemData)}
-            />
-        );
-    }
     function onStatusClick(itemData: TodosItemType) {
         if (!itemData.isActive) return;
 
