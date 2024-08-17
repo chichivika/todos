@@ -26,6 +26,7 @@ const BtnGroup = function (props: Props) {
         </div>
      )
 }
+//render one button of group
 function renderBtn(data: BtnItem, props: Props) {
     let className = 'app-btn-item';
     let key = data.key;

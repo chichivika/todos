@@ -19,6 +19,7 @@ type TodosProps = {
 };
 
 const Todos = function (props: TodosProps) {
+    //show input error state
     let [error, setError] = useState<boolean>(false);
     let [viewMode, setViewMode] = useState<ViewModeType>('all');
     let [inputValue, setInputValue] = useState<string>('');
@@ -48,8 +49,10 @@ const Todos = function (props: TodosProps) {
     );
 
     function onStatusClick(itemData: TodosItemType) {
+        //no update if the task is completed
         if (!itemData.isActive) return;
 
+        //complete the task
         props.onUpdateItem?.({
             desc: itemData.desc,
             isActive: false
@@ -61,6 +64,8 @@ const Todos = function (props: TodosProps) {
     }
     function onSubmitInput(inputValue: string) {
 
+        //if the task is already in todo list
+        //find by its description
         if (props.items.find(item => item.desc === inputValue)) {
             setError(true);
             return;
@@ -68,13 +73,16 @@ const Todos = function (props: TodosProps) {
 
         props.onCreateItem?.(inputValue);
         setError(false);
+        //clear input value
         setInputValue('');
 
+        //scroll to top
         let listCnt = listRef.current;
         if (listCnt !== null) {
             listCnt.scrollTop = 0;
         }
     }
+    //get items by view mode
     function getFilteredItems(viewMode: ViewModeType): TodosItemsType {
         switch (viewMode) {
             case 'active':

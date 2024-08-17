@@ -3,6 +3,8 @@ import { TodosStateType } from './storeUtils';
 import { createTodosSlice } from './todosSlice';
 import { getInitialTodosState } from './storeUtils';
 
+//function to reuse in tests
+//configure all store objects by initial state
 export function configureStoreDataByInitialState(initialState: TodosStateType) {
   const todosSlice = createTodosSlice(initialState);
   return {
@@ -12,6 +14,8 @@ export function configureStoreDataByInitialState(initialState: TodosStateType) {
     todosSlice
   };
 }
+//function to reuse in tests
+//configure store by initial state
 export function configureStoreByState(initialState: TodosStateType){
   const {store} = configureStoreDataByInitialState(initialState);
   return store;

@@ -20,6 +20,7 @@ const TodosFooter = function (props: Props) {
         </div>
     );
 }
+//render how many uncompleted tasks
 function renderLeftPart(props: Props) {
     if (typeof props.itemsToDone === 'number') {
         return (
@@ -30,6 +31,7 @@ function renderLeftPart(props: Props) {
     }
     return null;
 }
+//render clear completed btn
 function renderRightPart(props: Props) {
     if (props.showClearCompleted === true) {
         return (
@@ -42,6 +44,7 @@ function renderRightPart(props: Props) {
     }
     return null;
 }
+//render buttons for view mode switching
 function renderCenterPart(props: Props) {
     return (
         <BtnGroup

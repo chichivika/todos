@@ -23,7 +23,9 @@ const TodosInput = function(props: Props){
     );
 
     function onKeyUp(event: React.KeyboardEvent){
+        //submit when Enter-code
         if(event.code !== 'Enter') return;
+        //no submit if the value is empty
         if(props.value.length === 0) return;
 
         props.onSubmit(props.value);
