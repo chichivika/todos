@@ -1,16 +1,8 @@
 /* eslint-disable testing-library/prefer-screen-queries */
 import Todos from "components/todos/Todos";
 import { fireEvent, render, screen, getByRole } from "@testing-library/react";
-import { getTodosItemsByStatus } from "utils/appUtils";
+import { testItems, activeItems, completedItems } from "./testUtils";
 import '@testing-library/jest-dom';
-
-let testItems = [];
-for (let i = 0; i < 10; ++i) {
-    testItems.push({ desc: `task_${i}`, isActive: i % 2 === 0 });
-}
-const activeItems = getTodosItemsByStatus(testItems, true);
-const completedItems = getTodosItemsByStatus(testItems, false);
-
 
 describe('view my tasks in the list', () => {
 

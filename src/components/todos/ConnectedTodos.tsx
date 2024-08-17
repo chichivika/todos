@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createItem, updateItem, deleteCompleted } from "appRedux/todosSlice";
+import { createItem, updateItem, deleteCompleted } from "appRedux/store";
 import Todos from "./Todos";
 import type { Dispatch } from 'redux'
 import { TodosItemType } from "utils/appUtils";
