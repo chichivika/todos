@@ -1,6 +1,5 @@
 import { TodosItemType } from "utils/appUtils";
-import { Checkbox } from "@mui/material";
-
+import Checkbox from "components/base/checkbox/Checkbox";
 import './TodosItemStyle.scss';
 
 type Props = TodosItemType & {
