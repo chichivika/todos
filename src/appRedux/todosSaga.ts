@@ -4,7 +4,7 @@ import { deleteCompleted } from './todos/todosSlice';
 import { openConfirmDialog, closeConfirmDialog } from './dialog/dialogSlice';
 
 
-function* askDeleteCompleted(){
+export function* askDeleteCompleted(){
     yield put(openConfirmDialog({
         title:'Clear completed tasks?',
         text: 'Are you sure you want to clear all your completed tasks forever?'
