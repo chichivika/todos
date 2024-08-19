@@ -1,27 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { TodosStateType } from './storeUtils';
-import { createTodosSlice } from './todosSlice';
-import { getInitialTodosState } from './storeUtils';
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './todosSaga';
+import todosReducer from './todos/todosSlice';
+import dialogReducer from './dialog/dialogSlice';
+import { combineReducers } from '@reduxjs/toolkit';
 
-//function to reuse in tests
-//configure all store objects by initial state
-export function configureStoreDataByInitialState(initialState: TodosStateType) {
-  const todosSlice = createTodosSlice(initialState);
-  return {
-    store: configureStore({
-      reducer: todosSlice.reducer
-    }),
-    todosSlice
-  };
-}
-//function to reuse in tests
-//configure store by initial state
-export function configureStoreByState(initialState: TodosStateType){
-  const {store} = configureStoreDataByInitialState(initialState);
-  return store;
-}
 
-const {store, todosSlice} = configureStoreDataByInitialState(getInitialTodosState());
+const sagaMiddleware = createSagaMiddleware();
+const store = configureStore({
+  reducer: combineReducers({
+    todos: todosReducer,
+    dialog: dialogReducer
+  }),
+  middleware: getDM => getDM().concat(sagaMiddleware)
+});
+sagaMiddleware.run(rootSaga);
+
 export default store;
-export const { createItem, updateItem, deleteCompleted } = todosSlice.actions;
 export type StateType = ReturnType<typeof store.getState>;

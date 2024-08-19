@@ -1,12 +1,12 @@
-import { createItem, updateItem, deleteCompleted } from "appRedux/store";
-import { configureStoreByState } from "appRedux/store";
+import { createItem, updateItem, deleteCompleted } from "appRedux/todos/todosSlice";
+import { configureTodosStoreByState } from "./testStore";
 import { testItems, activeItems } from "./testUtils";
 
 const newTask = 'task_new';
 
 describe('todos Slice test', () => {
     it('create one task by dispatch', () => {
-        const store = configureStoreByState({ items: [] });
+        const store = configureTodosStoreByState({ items: [] });
         const newTaskData = { desc: newTask, isActive: true }
 
         expect(store.getState()).toEqual({ items: [] });
@@ -15,7 +15,7 @@ describe('todos Slice test', () => {
         expect(store.getState()).toEqual({ items: [newTaskData] });
     });
     it('create several tasks by dispatch', () => {
-        const store = configureStoreByState({ items: [] });
+        const store = configureTodosStoreByState({ items: [] });
 
         expect(store.getState().items.length).toBe(0);
         let times = 5;
@@ -25,7 +25,7 @@ describe('todos Slice test', () => {
         expect(store.getState().items.length).toBe(times);
     });
     it('update one task by dispatch', () => {
-        const store = configureStoreByState({ items: activeItems });
+        const store = configureTodosStoreByState({ items: activeItems });
 
         let firstItem = store.getState().items[0];
         expect(firstItem.isActive).toBeTruthy();
@@ -38,7 +38,7 @@ describe('todos Slice test', () => {
         expect(firstItem.isActive).toBeFalsy();
     });
     it('update several tasks by dispatch', () => {
-        const store = configureStoreByState({ items: activeItems });
+        const store = configureTodosStoreByState({ items: activeItems });
 
         activeItems.forEach((item, i) => {
             const stateItem = store.getState().items[i];
@@ -55,7 +55,7 @@ describe('todos Slice test', () => {
         });
     });
     it('clear completed tasks by dispatch', () => {
-        const store = configureStoreByState({ items: testItems });
+        const store = configureTodosStoreByState({ items: testItems });
         expect(store.getState().items.length).toBe(testItems.length);
 
         store.dispatch(deleteCompleted());

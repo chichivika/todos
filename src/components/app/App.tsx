@@ -1,5 +1,6 @@
 import './App.scss';
 import Todos from 'components/todos/ConnectedTodos';
+import ConnectedConfirmDialog from 'components/connected/dialog/ConnectedConfirmDialog';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
         todos
       </header>
       <Todos/>
+      <ConnectedConfirmDialog/>
     </div>
   );
 }

@@ -1,5 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TodosStateType } from './storeUtils';
+import { TodosItemsType } from "utils/appUtils";
+
+export type TodosStateType = {
+    items: TodosItemsType
+};
+export function getInitialTodosState(): TodosStateType {
+    return {
+        items: []
+    };
+}
 
 export function createTodosSlice(initialState:TodosStateType){
 
@@ -27,3 +36,6 @@ export function createTodosSlice(initialState:TodosStateType){
         }
     });
 }
+const todosSlice = createTodosSlice(getInitialTodosState());
+export default todosSlice.reducer;
+export const { createItem, updateItem, deleteCompleted } = todosSlice.actions;
