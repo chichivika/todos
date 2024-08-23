@@ -13,9 +13,18 @@ export function createMockAdapter(service: AxiosInstance) {
   const mock = new MockAdapter(service, { delayResponse: 900 });
 
   mock.onGet(paths.getTasks).reply(200, [...initialItems]);
-  mock.onDelete(paths.deleteTasks).reply(200, ({data}:{data: TodosItemsType})=>data.filter(item => item.isActive));
-  mock.onPut(paths.createTask).reply(200, ({data}:{data: TodosItemType})=>({...data, isActive: true}));
-  mock.onPost(paths.updateTask).reply(200, ({data}:{data: TodosItemType})=>({...data}));
+  mock.onDelete(paths.deleteTasks).reply(config => {
+    const data = JSON.parse(config.data) as TodosItemsType;
+    return [200, data.filter(item => item.isActive)];
+  });
+  mock.onPut(paths.createTask).reply(config => {
+    const data = JSON.parse(config.data) as TodosItemType;
+    return [200, { ...data, isActive: true }];
+  });
+  mock.onPost(paths.updateTask).reply(config => {
+    const data = JSON.parse(config.data) as TodosItemType;
+    return [200, { ...data}];
+  });
 
   return mock;
 }

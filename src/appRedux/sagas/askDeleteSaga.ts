@@ -1,11 +1,16 @@
-import { put, takeEvery, race, take } from 'redux-saga/effects';
+import { put, takeEvery, race, take, select, call } from 'redux-saga/effects';
 import { sagaActionsNames } from '../storeUtils';
-import { deleteCompleted } from '../todos/todosSlice';
 import { openConfirmDialog, closeConfirmDialog } from '../dialog/dialogSlice';
+import { deleteCompletedTasks } from 'service/requests';
+import { TodosItemsType } from 'utils/appUtils';
+import { showRequestError } from './errorSaga';
+import { setItems } from 'appRedux/todos/todosSlice';
+import { setTodosLoading } from 'appRedux/status/statusSlice';
 
 
 export function* askDeleteCompleted() {
     yield put(openConfirmDialog({
+        type: 'confirm',
         title: 'Clear completed tasks?',
         text: 'Are you sure you want to clear all your completed tasks forever?'
     }));
@@ -14,12 +19,21 @@ export function* askDeleteCompleted() {
         ok: take(sagaActionsNames.confirmDialogOk),
         cancel: take(sagaActionsNames.confirmDialogCancel)
     })
-
-    if (ok) {
-        yield put(deleteCompleted());
-    }
-
     yield put(closeConfirmDialog());
+    if (!ok) return;
+
+    yield put(setTodosLoading(true));
+    let items: TodosItemsType = yield select(state => state.todos.items);
+    try {
+        let newItems: TodosItemsType = yield call(deleteCompletedTasks, items);
+        yield put(setItems(newItems));
+    }
+    catch (err) {
+        yield call(showRequestError, err);
+    }
+    finally{
+        yield put(setTodosLoading(false));
+    }
 }
 
 export function* deleteCompletedSaga() {

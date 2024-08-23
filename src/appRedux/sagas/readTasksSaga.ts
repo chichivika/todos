@@ -5,6 +5,7 @@ import { TodosItemsType } from 'utils/appUtils';
 import { selectItemsWereRead } from 'appRedux/status/statusSlice';
 import { setItems } from 'appRedux/todos/todosSlice';
 import { setItemsWereRead, setTodosLoading } from 'appRedux/status/statusSlice';
+import { showRequestError } from './errorSaga';
 
 export function* readTasks() {
     const wereRead:boolean | undefined = yield select(selectItemsWereRead);
@@ -17,7 +18,7 @@ export function* readTasks() {
         yield put(setItems(items));
     }
     catch (err) {
-        alert(err);
+        yield call(showRequestError, err);
     }
     finally{
         yield put(setTodosLoading(false));

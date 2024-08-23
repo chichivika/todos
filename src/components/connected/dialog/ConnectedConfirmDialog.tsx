@@ -10,6 +10,7 @@ const ConnectedConfirmDialog = function () {
         open={useSelector((state:StateType)=>state.dialog.confirm.open)}
         title={useSelector((state:StateType)=>state.dialog.confirm.title)}
         text={useSelector((state:StateType)=>state.dialog.confirm.text)}
+        type={useSelector((state:StateType)=>state.dialog.confirm.type)}
         onOk={()=>{dispatch(sagaActionsGetter.confirmDialogOk())}}
         onCancel={()=>{dispatch(sagaActionsGetter.confirmDialogCancel())}}
         />
