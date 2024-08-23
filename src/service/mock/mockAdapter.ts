@@ -10,7 +10,7 @@ const initialItems = [
 ]
 
 export function createMockAdapter(service: AxiosInstance) {
-  const mock = new MockAdapter(service, { delayResponse: 900 });
+  const mock = new MockAdapter(service, { delayResponse: 500 });
 
   mock.onGet(paths.getTasks).reply(200, [...initialItems]);
   mock.onDelete(paths.deleteTasks).reply(config => {
@@ -19,11 +19,11 @@ export function createMockAdapter(service: AxiosInstance) {
   });
   mock.onPut(paths.createTask).reply(config => {
     const data = JSON.parse(config.data) as TodosItemType;
-    return [200, { ...data, isActive: true }];
+    return [200, {...data}];
   });
   mock.onPost(paths.updateTask).reply(config => {
     const data = JSON.parse(config.data) as TodosItemType;
-    return [200, { ...data}];
+    return [200, {...data}];
   });
 
   return mock;

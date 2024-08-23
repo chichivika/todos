@@ -1,9 +1,10 @@
 import { askDeleteCompleted } from "appRedux/sagas/askDeleteSaga";
 import { expectSaga } from "redux-saga-test-plan";
 import { sagaActionsNames } from "appRedux/storeUtils";
-import { race, take } from "redux-saga/effects";
+import { race, take, call } from "redux-saga/effects";
 import { testItems, activeItems } from "./testUtils";
 import { createTodosSlice } from "appRedux/todos/todosSlice";
+import { deleteCompletedTasks } from "service/requests";
 
 describe('askDeleteCompletedSaga test', () => {
     it('agree to clear completed', () => {
@@ -15,7 +16,8 @@ describe('askDeleteCompletedSaga test', () => {
                 [race({
                     ok: take(sagaActionsNames.confirmDialogOk),
                     cancel: take(sagaActionsNames.confirmDialogCancel)
-                }), {ok: true}]
+                }), {ok: true}],
+                [call(deleteCompletedTasks, []), activeItems]
             ])
             .hasFinalState({items: activeItems})
             .run();

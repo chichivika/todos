@@ -22,10 +22,7 @@ export function createTodosSlice(initialState: TodosStateType) {
             },
             //create new task
             createItem: (state, action) => {
-                state.items.unshift({
-                    desc: action.payload,
-                    isActive: true
-                });
+                state.items.unshift(action.payload);
             },
             //update task
             updateItem: (state, action) => {

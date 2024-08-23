@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createItem, updateItem} from "appRedux/todos/todosSlice";
 import Todos from "./Todos";
 import type { Dispatch } from 'redux'
 import { TodosItemType } from "utils/appUtils";
@@ -12,8 +11,8 @@ const ConnectedTodos = function () {
     return (
         <Todos items={useSelector((state: StateType)=>state.todos.items)}
                 todosLoading={useSelector(selectTodosLoading)}
-                onCreateItem = {(value:string)=>dispatch(createItem(value))}
-                onUpdateItem = {(newData:TodosItemType)=>dispatch(updateItem(newData))}
+                onCreateItem = {(value:string)=>dispatch(sagaActionsGetter.createTask(value))}
+                onUpdateItem = {(newData:TodosItemType)=>dispatch(sagaActionsGetter.updateTask(newData))}
                 onDeleteCompleted = {()=>{dispatch(sagaActionsGetter.askDeleteCompleted())}}
         />
     );

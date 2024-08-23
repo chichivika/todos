@@ -6,13 +6,14 @@ const newTask = 'task_new';
 
 describe('todos Slice test', () => {
     it('create one task by dispatch', () => {
-        const store = configureTodosStoreByState({ items: [] });
+        const initial = [testItems[0]];
+        const store = configureTodosStoreByState({ items: initial });
         const newTaskData = { desc: newTask, isActive: true }
 
-        expect(store.getState()).toEqual({ items: [] });
-        store.dispatch(createItem(newTask));
+        expect(store.getState()).toEqual({ items: initial });
+        store.dispatch(createItem(newTaskData));
 
-        expect(store.getState()).toEqual({ items: [newTaskData] });
+        expect(store.getState()).toEqual({ items: [newTaskData,...initial] });
     });
     it('create several tasks by dispatch', () => {
         const store = configureTodosStoreByState({ items: [] });
@@ -20,7 +21,7 @@ describe('todos Slice test', () => {
         expect(store.getState().items.length).toBe(0);
         let times = 5;
         for (let i = 0; i < times; ++i) {
-            store.dispatch(createItem(`${newTask}_i`));
+            store.dispatch(createItem({desc: `${newTask}_i`, isActive: true}));
         }
         expect(store.getState().items.length).toBe(times);
     });
@@ -60,5 +61,8 @@ describe('todos Slice test', () => {
 
         store.dispatch(setItems(activeItems));
         expect(store.getState().items.length).toBe(activeItems.length);
+
+        store.dispatch(setItems([]));
+        expect(store.getState().items.length).toBe(0);
     });
 });
