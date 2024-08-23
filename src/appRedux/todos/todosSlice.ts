@@ -32,10 +32,6 @@ export function createTodosSlice(initialState: TodosStateType) {
                 const newItem = action.payload;
                 const index = state.items.findIndex(item => item.desc === newItem.desc);
                 state.items.splice(index, 1, newItem);
-            },
-            //clear all completed tasks
-            deleteCompleted: (state) => {
-                state.items = state.items.filter(item => item.isActive);
             }
         },
         selectors: {
@@ -44,4 +40,4 @@ export function createTodosSlice(initialState: TodosStateType) {
 }
 const todosSlice = createTodosSlice(getInitialTodosState());
 export default todosSlice.reducer;
-export const { createItem, updateItem, deleteCompleted, setItems } = todosSlice.actions;
+export const { createItem, updateItem, setItems } = todosSlice.actions;
