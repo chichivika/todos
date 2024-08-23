@@ -1,6 +1,7 @@
 import './TodosStyle.scss';
 import TodosInput from './todosInput/TodosInput';
 import TodosList from './todosList/TodosList';
+import BusyBlock from '../base/busyBlock/BusyBlock';
 import { TodosItemType, TodosItemsType } from 'utils/appUtils';
 import TodosFooter from './todosFooter/TodosFooter';
 import { useState } from 'react';
@@ -13,6 +14,7 @@ export type DeleteCompleted = () => void;
 
 type TodosProps = {
     items: TodosItemsType,
+    todosLoading?: boolean,
     onUpdateItem?: UpdateItem,
     onCreateItem?: CreateItem,
     onDeleteCompleted?: DeleteCompleted
@@ -45,6 +47,7 @@ const Todos = function (props: TodosProps) {
                 viewMode={viewMode}
                 onModeChange={key => setViewMode(key)}
             />
+            <BusyBlock busy={props.todosLoading || false}/>
         </div>
     );
 
