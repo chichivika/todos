@@ -6,7 +6,7 @@ import { TodosItemsType } from 'utils/appUtils';
 import { showRequestError } from './errorSaga';
 import { setItems } from 'appRedux/todos/todosSlice';
 import { setTodosLoading } from 'appRedux/status/statusSlice';
-import { selectItems } from 'appRedux/todos/todosSlice';
+import { selectCompletedItems } from 'appRedux/todos/todosSlice';
 
 
 export function* askDeleteCompleted() {
@@ -24,7 +24,7 @@ export function* askDeleteCompleted() {
     if (!ok) return;
 
     yield put(setTodosLoading(true));
-    let items: TodosItemsType = yield select(selectItems);
+    let items: TodosItemsType = yield select(selectCompletedItems);
     try {
         let newItems: TodosItemsType = yield call(deleteCompletedTasks, items);
         yield put(setItems(newItems));
