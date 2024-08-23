@@ -15,7 +15,6 @@ export function* readTasks() {
     try {
         const items: TodosItemsType = yield call(getAllTasks);
         yield put(setItems(items));
-        console.log('reading');
     }
     catch (err) {
         alert(err);
