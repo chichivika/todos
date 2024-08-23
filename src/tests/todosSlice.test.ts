@@ -1,4 +1,4 @@
-import { createItem, updateItem, deleteCompleted } from "appRedux/todos/todosSlice";
+import { createItem, updateItem, setItems } from "appRedux/todos/todosSlice";
 import { configureTodosStoreByState } from "./testStore";
 import { testItems, activeItems } from "./testUtils";
 
@@ -54,11 +54,11 @@ describe('todos Slice test', () => {
             expect(stateItem.isActive).toBeFalsy();
         });
     });
-    it('clear completed tasks by dispatch', () => {
+    it('set tasks by dispatch', () => {
         const store = configureTodosStoreByState({ items: testItems });
         expect(store.getState().items.length).toBe(testItems.length);
 
-        store.dispatch(deleteCompleted());
+        store.dispatch(setItems(activeItems));
         expect(store.getState().items.length).toBe(activeItems.length);
     });
 });
