@@ -1,4 +1,4 @@
-import { askDeleteCompleted } from "appRedux/todosSaga";
+import { askDeleteCompleted } from "appRedux/sagas/askDeleteSaga";
 import { expectSaga } from "redux-saga-test-plan";
 import { sagaActionsNames } from "appRedux/storeUtils";
 import { race, take } from "redux-saga/effects";

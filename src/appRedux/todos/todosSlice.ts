@@ -10,12 +10,16 @@ export function getInitialTodosState(): TodosStateType {
     };
 }
 
-export function createTodosSlice(initialState:TodosStateType){
+export function createTodosSlice(initialState: TodosStateType) {
 
     return createSlice({
         name: 'todos',
         initialState: initialState,
         reducers: {
+            //put my tasks in store
+            setItems: (state, action) => {
+                state.items = action.payload;
+            },
             //create new task
             createItem: (state, action) => {
                 state.items.unshift({
@@ -31,11 +35,13 @@ export function createTodosSlice(initialState:TodosStateType){
             },
             //clear all completed tasks
             deleteCompleted: (state) => {
-                state.items = state.items.filter(item=>item.isActive);
+                state.items = state.items.filter(item => item.isActive);
             }
+        },
+        selectors: {
         }
     });
 }
 const todosSlice = createTodosSlice(getInitialTodosState());
 export default todosSlice.reducer;
-export const { createItem, updateItem, deleteCompleted } = todosSlice.actions;
+export const { createItem, updateItem, deleteCompleted, setItems } = todosSlice.actions;

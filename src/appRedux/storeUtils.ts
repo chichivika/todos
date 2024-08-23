@@ -9,11 +9,13 @@ export function getAction<dataType>(action: string, data?: dataType): Action<dat
 export const sagaActionsNames = {
     askDeleteCompleted: 'todos/deleteCompletedSaga',
     confirmDialogCancel: 'dialog/confirmCancel',
-    confirmDialogOk: 'dialog/confirmOk'
+    confirmDialogOk: 'dialog/confirmOk',
+    readTasks: 'todos/readTasks'
 };
 
 export const sagaActionsGetter = {
     askDeleteCompleted: () => getAction(sagaActionsNames.askDeleteCompleted),
     confirmDialogCancel: () => getAction(sagaActionsNames.confirmDialogCancel),
-    confirmDialogOk: () => getAction(sagaActionsNames.confirmDialogOk)
+    confirmDialogOk: () => getAction(sagaActionsNames.confirmDialogOk),
+    readTasks: ()=> getAction(sagaActionsNames.readTasks)
 };
