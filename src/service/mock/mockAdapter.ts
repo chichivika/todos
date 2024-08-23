@@ -5,7 +5,7 @@ import { AxiosInstance } from 'axios';
 const items = [
   { desc: 'Learn new English words', isActive: true },
   { desc: 'Wash my car', isActive: true },
-  { desc: 'Add mock server in the app', isActive: false }
+  { desc: 'Add mock server to the app', isActive: false }
 ]
 
 export function createMockAdapter(service: AxiosInstance) {
