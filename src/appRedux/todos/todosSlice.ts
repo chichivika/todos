@@ -32,9 +32,19 @@ export function createTodosSlice(initialState: TodosStateType) {
             }
         },
         selectors: {
+            selectItems:(state)=>{
+                return state.items;
+            },
+            selectActiveItems:(state)=>{
+                return state.items.filter(item => item.isActive);
+            },
+            selectCompletedItems:(state)=>{
+                return state.items.filter(item => !item.isActive);
+            }
         }
     });
 }
 const todosSlice = createTodosSlice(getInitialTodosState());
 export default todosSlice.reducer;
 export const { createItem, updateItem, setItems } = todosSlice.actions;
+export const {selectItems, selectActiveItems, selectCompletedItems} = todosSlice.selectors;
