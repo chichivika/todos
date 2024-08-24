@@ -1,6 +1,4 @@
-import Button from "../button/Button";
-
-import './BtnGroupStyle.scss';
+import { StyledBtnGroup, StyledBtnItem} from "./styled";
 
 type BtnItem = {
     key: string,
@@ -9,39 +7,31 @@ type BtnItem = {
 type Props = {
     selectedKey: string,
     btnItems: BtnItem[],
-    className?: string,
     onClick?: (key: string) => void
 }
 
-const groupClassName = 'app-btn-group';
-
 const BtnGroup = function (props: Props) {
-    if(props.btnItems.length === 0){
+    if (props.btnItems.length === 0) {
         return null;
     }
-    let className = props.className ? `${groupClassName} `.concat(props.className) : groupClassName;
-     return (
-        <div className={className}>
+    return (
+        <StyledBtnGroup>
             {props.btnItems.map(btnData => renderBtn(btnData, props))}
-        </div>
-     )
+        </StyledBtnGroup>
+    );
 }
-//render one button of group
+//render one button of the group
 function renderBtn(data: BtnItem, props: Props) {
-    let className = 'app-btn-item';
     let key = data.key;
 
-    if (props.selectedKey === key) {
-        className = className.concat(' app-btn-item-selected');
-    }
-
     return (
-        <Button
-            className={className}
+        <StyledBtnItem
             key={key}
-            onClick={() => { onBtnClick(key, props) }}>
+            onClick={() => { onBtnClick(key, props) }}
+            $selected = {props.selectedKey === key}
+        >
             {data.text}
-        </Button>
+        </StyledBtnItem>
     );
 }
 function onBtnClick(key: string, props: Props) {

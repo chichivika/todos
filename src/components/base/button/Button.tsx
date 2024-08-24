@@ -1,20 +1,21 @@
-import { Button as UiBtn } from '@mui/material';
+import BtnUi from '@mui/material/Button';
 import { ButtonProps } from '@mui/material/Button';
+import colors from 'styles/colors';
 
-import './ButtonStyle.scss';
-
-const btnClassName = 'app-btn';
+const styles = {
+    color: colors.baseColor
+};
 const Button = function (props: ButtonProps) {
-    let { children, ...attr } = props;
+    let { children, sx = {}, ...attr } = props;
 
     attr.size = 'small';
 
-    attr.className = attr.className ? `${btnClassName} `.concat(attr.className) : btnClassName;
-
     return (
-        <UiBtn {...attr}>
+        <BtnUi {...attr}
+            sx={{ ...styles, ...sx }}
+        >
             {children}
-        </UiBtn>
+        </BtnUi>
     );
 }
 

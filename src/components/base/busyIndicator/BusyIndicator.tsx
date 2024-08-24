@@ -1,9 +1,11 @@
 import { CircularProgress as UiProgress } from '@mui/material';
 import { CircularProgressProps } from '@mui/material';
-import './BusyIndStyle.scss';
+import colors from 'styles/colors';
 
-const BusyIndicator = function(props: CircularProgressProps){
-    return <UiProgress className='app-busy-ind' {...props}/>
+const BusyIndicator = function (props: CircularProgressProps) {
+    return <UiProgress {...props}
+        sx={{ color: colors.baseColor }}
+    />
 }
 
 export default BusyIndicator;

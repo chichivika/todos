@@ -1,6 +1,6 @@
-import './App.scss';
-import Todos from 'components/todos/ConnectedTodos';
+import Todos from 'components/connected/todos/ConnectedTodos';
 import ConnectedConfirmDialog from 'components/connected/dialog/ConnectedConfirmDialog';
+import { StyledApp, StyledHeader } from './styled';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { sagaActionsGetter } from 'appRedux/storeUtils';
@@ -13,13 +13,13 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
-      <header className="app-header">
+    <StyledApp>
+      <StyledHeader>
         todos
-      </header>
+      </StyledHeader>
       <Todos />
       <ConnectedConfirmDialog />
-    </div>
+    </StyledApp>
   );
 }
 

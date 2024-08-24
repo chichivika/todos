@@ -1,6 +1,3 @@
-
-@use 'src/styles/colors';
-
 :root{
   height: 100%;
 }
@@ -12,5 +9,4 @@ body {
   margin: 0;
   width: 100%;
   height: inherit;
-  background-color: colors.$bg-color;
 }

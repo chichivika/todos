@@ -1,7 +1,11 @@
 import Button from 'components/base/button/Button';
-import './TodosFooterStyle.scss';
-import BtnGroup from 'components/base/btnGroup/BtnGroup';
 import { ViewModeType } from 'utils/appUtils';
+import BtnGroup from 'components/base/btnGroup/BtnGroup';
+import {
+    StyledFooter,
+    StyledLeftPart,
+    StyledRightPart
+} from './styled';
 
 type Props = {
     viewMode: ViewModeType,
@@ -13,20 +17,20 @@ type Props = {
 
 const TodosFooter = function (props: Props) {
     return (
-        <div className='todos-footer'>
+        <StyledFooter>
             {renderLeftPart(props)}
             {renderCenterPart(props)}
             {renderRightPart(props)}
-        </div>
+        </StyledFooter>
     );
 }
 //render how many uncompleted tasks
 function renderLeftPart(props: Props) {
     if (typeof props.itemsToDone === 'number') {
         return (
-            <div className='todos-footer-left'>
+            <StyledLeftPart>
                 {`${props.itemsToDone} to be done`}
-            </div>
+            </StyledLeftPart>
         );
     }
     return null;
@@ -35,11 +39,11 @@ function renderLeftPart(props: Props) {
 function renderRightPart(props: Props) {
     if (props.showClearCompleted === true) {
         return (
-            <div className='todos-footer-right'>
+            <StyledRightPart>
                 <Button size='small'
                     onClick={() => props.onClearCompleted?.()}
                 >Clear Completed</Button>
-            </div>
+            </StyledRightPart>
         );
     }
     return null;
@@ -48,7 +52,6 @@ function renderRightPart(props: Props) {
 function renderCenterPart(props: Props) {
     return (
         <BtnGroup
-            className='todos-footer-center'
             selectedKey={props.viewMode}
             btnItems={[
                 { key: 'all', text: 'All' },

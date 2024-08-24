@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import Todos from "./Todos";
+import Todos from "../../todos/todosCnt/Todos";
 import type { Dispatch } from 'redux'
 import { TodosItemType } from "utils/appUtils";
 import { StateType } from "appRedux/store";

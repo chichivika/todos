@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/prefer-screen-queries */
-import Todos from "components/todos/Todos";
+import Todos from "components/todos/todosCnt/Todos";
 import { fireEvent, render, screen, getByRole } from "@testing-library/react";
 import { testItems, activeItems, completedItems } from "./testUtils";
 import '@testing-library/jest-dom';

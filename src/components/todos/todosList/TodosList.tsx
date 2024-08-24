@@ -1,7 +1,6 @@
 import { TodosItemsType, TodosItemType } from 'utils/appUtils';
 import TodosItem from '../todosItem/TodosItem';
-
-import './TodosListStyle.scss';
+import { StyledTodosList } from './styled';
 
 type Props = {
     items: TodosItemsType,
@@ -11,10 +10,10 @@ type Props = {
 
 const TodosList = function (props: Props) {
     return (
-        <div className='todos-list'
+        <StyledTodosList
             ref={props.listRef || null}>
             {renderItems()}
-        </div>
+        </StyledTodosList>
     );
 
     function renderItems() {

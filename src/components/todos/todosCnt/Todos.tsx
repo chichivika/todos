@@ -1,9 +1,9 @@
-import './TodosStyle.scss';
-import TodosInput from './todosInput/TodosInput';
-import TodosList from './todosList/TodosList';
-import BusyBlock from '../base/busyBlock/BusyBlock';
+import { StyledTodos, todosInputSX } from './styled';
+import TodosInput from "../todosInput/TodosInput";
+import TodosList from '../todosList/TodosList';
+import BusyBlock from '../../base/busyBlock/BusyBlock';
 import { TodosItemType, TodosItemsType } from 'utils/appUtils';
-import TodosFooter from './todosFooter/TodosFooter';
+import TodosFooter from '../todosFooter/TodosFooter';
 import { useState } from 'react';
 import { ViewModeType, getTodosItemsByStatus } from 'utils/appUtils';
 import { useRef } from 'react';
@@ -29,8 +29,9 @@ const Todos = function (props: TodosProps) {
     let listRef = useRef<HTMLDivElement>(null);
 
     return (
-        <div className='todos-cnt'>
+        <StyledTodos>
             <TodosInput
+                sx={todosInputSX}
                 error={error}
                 value={inputValue}
                 onSubmit={onSubmitInput}
@@ -48,7 +49,7 @@ const Todos = function (props: TodosProps) {
                 onModeChange={key => setViewMode(key)}
             />
             <BusyBlock busy={props.todosLoading || false}/>
-        </div>
+        </StyledTodos>
     );
 
     function onStatusClick(itemData: TodosItemType) {

@@ -1,5 +1,4 @@
-import BusyIndicator from "../busyIndicator/BusyIndicator";
-import './BusyBlockStyle.scss';
+import { StyledBlock, StyledIndicator } from "./styled";
 
 type Props = {
     busy: boolean
@@ -11,9 +10,9 @@ const BusyBlock = (props:Props) => {
     }
 
     return (
-        <div className="app-busy-block">
-            <BusyIndicator size={40}/>
-        </div>
+        <StyledBlock>
+            <StyledIndicator size={40}/>
+        </StyledBlock>
     );
 }
 
